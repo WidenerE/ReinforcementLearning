@@ -24,4 +24,4 @@ Once a game has been won, the winner is reported to the player and the player ha
 The user is also given the option to have the machine simulate games against itself to more quickly teach it which moves to avoid.
 In this case, the user is prompted for how many games they want to simulate, and what the maximum pile size should be. The pile sizes are determined randomly
 in the range 0-max at the start of every game. Using this option, many unsafe game states can be generated quickly and increase the size of the external file
-immensely. For this reason, every search through the file is done via a binary search to increase efficiency.
+immensely.
