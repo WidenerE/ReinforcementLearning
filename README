@@ -1,0 +1,27 @@
+The purpose of this algorithm is to allow the user to play a game of Nim against a computer opponent that becomes more proficient
+at the game every round via reinforcement learning.
+
+The current state of the game is tracked  by a "game state" that contains information such as the number of chips left in each pile
+and whether or not the game is over or should continue. The game state is updated after every turn.
+
+First, the user sets up the game by entering how many chips they want in each pile, and who should take their turn first. After that, each
+player alternates taking a turn until the game is won.
+
+A turn consists of prompting the player for which pile they want to remove up to three but not less than one chips from. That number of chips
+is then subtracted from the specified pile, and the game state is updated. The game state is then reported to the player.
+
+Machine turns work the exact same way, except the algorithm tells the machine what moves to make. The best moves for the machine are determined
+by avoiding a list of game states deemed "unsafe," meaning that if such a state is reached, the other player is guranteed a win with optimal play.
+The machine begins by trying to subtract the maximum number of chips from the first available pile. The file containing the unsafe moves is then searched,
+and if the resulting game state is not registered as unsafe, the move is made. Otherwise, the next pile is checked. if all three piles result in an unsafe move,
+2 and then 1 chips are subtracted. If there are no safe moves to be made, add all of the previous game states that could lead to the losing state to the external file,
+and remove whatever chips are available.
+
+With each subsequent game, the machine "learns" which moves to avoid, and becomes more difficult to beat.
+
+Once a game has been won, the winner is reported to the player and the player has the option of starting another game.
+
+The user is also given the option to have the machine simulate games against itself to more quickly teach it which moves to avoid.
+In this case, the user is prompted for how many games they want to simulate, and what the maximum pile size should be. The pile sizes are determined randomly
+in the range 0-max at the start of every game. Using this option, many unsafe game states can be generated quickly and increase the size of the external file
+immensely. For this reason, every search through the file is done via a binary search to increase efficiency.
